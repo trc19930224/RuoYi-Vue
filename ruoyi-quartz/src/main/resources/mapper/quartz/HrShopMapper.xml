@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.quartz.mapper.HrShopMapper">
+    
+    <resultMap type="HrShop" id="HrShopResult">
+        <result property="cityId"    column="city_id"    />
+        <result property="cityName"    column="city_name"    />
+        <result property="code"    column="code"    />
+        <result property="distance"    column="distance"    />
+        <result property="endTime"    column="end_time"    />
+        <result property="latitude"    column="latitude"    />
+        <result property="longitude"    column="longitude"    />
+        <result property="psId"    column="ps_id"    />
+        <result property="saleCount"    column="sale_count"    />
+        <result property="startTime"    column="start_time"    />
+        <result property="storeName"    column="store_name"    />
+        <result property="storesAddress"    column="stores_address"    />
+        <result property="state"    column="state"    />
+    </resultMap>
+
+    <sql id="selectHrShopVo">
+        select city_id, city_name, code, distance, end_time, latitude, longitude, ps_id, sale_count, start_time, store_name, stores_address, state from hr_shop
+    </sql>
+
+    <select id="selectHrShopList" parameterType="HrShop" resultMap="HrShopResult">
+        <include refid="selectHrShopVo"/>
+        <where>  
+            <if test="cityId != null "> and city_id = #{cityId}</if>
+            <if test="cityName != null  and cityName != ''"> and city_name like concat('%', #{cityName}, '%')</if>
+            <if test="distance != null "> and distance = #{distance}</if>
+            <if test="endTime != null  and endTime != ''"> and end_time = #{endTime}</if>
+            <if test="latitude != null "> and latitude = #{latitude}</if>
+            <if test="longitude != null "> and longitude = #{longitude}</if>
+            <if test="psId != null "> and ps_id = #{psId}</if>
+            <if test="saleCount != null "> and sale_count = #{saleCount}</if>
+            <if test="startTime != null  and startTime != ''"> and start_time = #{startTime}</if>
+            <if test="storeName != null  and storeName != ''"> and store_name like concat('%', #{storeName}, '%')</if>
+            <if test="storesAddress != null  and storesAddress != ''"> and stores_address = #{storesAddress}</if>
+            <if test="state != null "> and state = #{state}</if>
+        </where>
+    </select>
+    
+    <select id="selectHrShopById" parameterType="String" resultMap="HrShopResult">
+        <include refid="selectHrShopVo"/>
+        where code = #{code}
+    </select>
+        
+    <insert id="insertHrShop" parameterType="HrShop">
+        insert into hr_shop
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="cityId != null">city_id,</if>
+            <if test="cityName != null and cityName != ''">city_name,</if>
+            <if test="code != null">code,</if>
+            <if test="distance != null">distance,</if>
+            <if test="endTime != null and endTime != ''">end_time,</if>
+            <if test="latitude != null">latitude,</if>
+            <if test="longitude != null">longitude,</if>
+            <if test="psId != null">ps_id,</if>
+            <if test="saleCount != null">sale_count,</if>
+            <if test="startTime != null and startTime != ''">start_time,</if>
+            <if test="storeName != null and storeName != ''">store_name,</if>
+            <if test="storesAddress != null and storesAddress != ''">stores_address,</if>
+            <if test="state != null">state,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="cityId != null">#{cityId},</if>
+            <if test="cityName != null and cityName != ''">#{cityName},</if>
+            <if test="code != null">#{code},</if>
+            <if test="distance != null">#{distance},</if>
+            <if test="endTime != null and endTime != ''">#{endTime},</if>
+            <if test="latitude != null">#{latitude},</if>
+            <if test="longitude != null">#{longitude},</if>
+            <if test="psId != null">#{psId},</if>
+            <if test="saleCount != null">#{saleCount},</if>
+            <if test="startTime != null and startTime != ''">#{startTime},</if>
+            <if test="storeName != null and storeName != ''">#{storeName},</if>
+            <if test="storesAddress != null and storesAddress != ''">#{storesAddress},</if>
+            <if test="state != null">#{state},</if>
+         </trim>
+    </insert>
+
+    <update id="updateHrShop" parameterType="HrShop">
+        update hr_shop
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="cityId != null">city_id = #{cityId},</if>
+            <if test="cityName != null and cityName != ''">city_name = #{cityName},</if>
+            <if test="distance != null">distance = #{distance},</if>
+            <if test="endTime != null and endTime != ''">end_time = #{endTime},</if>
+            <if test="latitude != null">latitude = #{latitude},</if>
+            <if test="longitude != null">longitude = #{longitude},</if>
+            <if test="psId != null">ps_id = #{psId},</if>
+            <if test="saleCount != null">sale_count = #{saleCount},</if>
+            <if test="startTime != null and startTime != ''">start_time = #{startTime},</if>
+            <if test="storeName != null and storeName != ''">store_name = #{storeName},</if>
+            <if test="storesAddress != null and storesAddress != ''">stores_address = #{storesAddress},</if>
+            <if test="state != null">state = #{state},</if>
+        </trim>
+        where code = #{code}
+    </update>
+
+    <delete id="deleteHrShopById" parameterType="String">
+        delete from hr_shop where code = #{code}
+    </delete>
+
+    <delete id="deleteHrShopByIds" parameterType="String">
+        delete from hr_shop where code in 
+        <foreach item="code" collection="array" open="(" separator="," close=")">
+            #{code}
+        </foreach>
+    </delete>
+    
+</mapper>

@@ -118,3 +118,18 @@ xss:
   excludes: /system/notice/*
   # 匹配链接
   urlPatterns: /system/*,/monitor/*,/tool/*
+
+# okhttp3相关配置
+ok:
+  http:
+    connect-timeout: 30
+    read-timeout: 30
+    write-timeout: 30
+    # 连接池中整体的空闲连接的最大数量
+    max-idle-connections: 200
+    # 连接空闲时间最多为 300 秒
+    keep-alive-duration: 300
+
+requestUrl:
+  getCityInfo: "https://app.crv.com.cn/app_timelimit/v1/dc-timelimit/presale/serialwine/getCity"
+  getShopsInfo: "https://app.crv.com.cn/app_timelimit/v1/dc-timelimit/presale/serialwine/getShops"
