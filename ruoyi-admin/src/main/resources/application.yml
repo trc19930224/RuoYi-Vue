@@ -133,3 +133,8 @@ ok:
 requestUrl:
   getCityInfo: "https://app.crv.com.cn/app_timelimit/v1/dc-timelimit/presale/serialwine/getCity"
   getShopsInfo: "https://app.crv.com.cn/app_timelimit/v1/dc-timelimit/presale/serialwine/getShops"
+  login: "https://app.crv.com.cn/app_api/v1/dc-app-api/mobile/api/user/login"
+  userInfo: "https://app.crv.com.cn/app_api/v1/dc-app-api/mobile/api/user/info"
+
+rsa:
+  publicKey: "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCbSCYMupAFFYE5vs1Zxu+77NB03lDoeKvsqLgGQndwdGSj5NppiDguoyTN0dHANlsG7zvhyauyueGx32LvcvfKuzfpGxMazwt91ivI+uL3ZbHkbOi74NUS8ob7Teol0iQO8ZAMmRL2fSPeDL0RHFUf4CN185lxlZ0egiM3kTarJQIDAQAB"

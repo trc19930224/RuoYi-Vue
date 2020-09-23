@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.quartz.mapper.HrUserMapper">
+    
+    <resultMap type="HrUser" id="HrUserResult">
+        <result property="id"    column="id"    />
+        <result property="mobile"    column="mobile"    />
+        <result property="password"    column="password"    />
+        <result property="userSession"    column="user_session"    />
+        <result property="birthday"    column="birthday"    />
+        <result property="idCard"    column="id_card"    />
+        <result property="regionName"    column="region_name"    />
+        <result property="pic"    column="pic"    />
+        <result property="cardNo"    column="card_no"    />
+        <result property="unSendOrderCount"    column="un_send_order_count"    />
+        <result property="loginName"    column="login_name"    />
+        <result property="unReceiveOrderCount"    column="un_receive_order_count"    />
+        <result property="nickname"    column="nickname"    />
+        <result property="unPayOrderCount"    column="un_pay_order_count"    />
+        <result property="shopId"    column="shop_id"    />
+        <result property="memberId"    column="member_id"    />
+        <result property="inquire"    column="inquire"    />
+        <result property="address"    column="address"    />
+        <result property="uname"    column="uname"    />
+        <result property="sex"    column="sex"    />
+        <result property="collectCount"    column="collect_count"    />
+        <result property="unreadMessageCount"    column="unread_message_count"    />
+        <result property="unEvaluateOrderCount"    column="un_evaluate_order_count"    />
+        <result property="zipcode"    column="zipcode"    />
+        <result property="realName"    column="real_name"    />
+        <result property="regionId"    column="region_id"    />
+        <result property="clerkCode"    column="clerk_code"    />
+        <result property="accountBalance"    column="account_balance"    />
+        <result property="ncmsMemberId"    column="ncms_member_id"    />
+        <result property="isOrder"    column="is_order"    />
+    </resultMap>
+
+    <sql id="selectHrUserVo">
+        select id, mobile, password, user_session, birthday, id_card, region_name, pic, card_no, un_send_order_count, login_name, un_receive_order_count, nickname, un_pay_order_count, shop_id, member_id, inquire, address, uname, sex, collect_count, unread_message_count, un_evaluate_order_count, zipcode, real_name, region_id, clerk_code, account_balance, ncms_member_id, is_order from hr_user
+    </sql>
+
+    <select id="selectHrUserList" parameterType="HrUser" resultMap="HrUserResult">
+        <include refid="selectHrUserVo"/>
+        <where>  
+            <if test="password != null  and password != ''"> and password = #{password}</if>
+            <if test="userSession != null  and userSession != ''"> and user_session = #{userSession}</if>
+            <if test="birthday != null  and birthday != ''"> and birthday = #{birthday}</if>
+            <if test="idCard != null  and idCard != ''"> and id_card = #{idCard}</if>
+            <if test="regionName != null  and regionName != ''"> and region_name like concat('%', #{regionName}, '%')</if>
+            <if test="pic != null "> and pic = #{pic}</if>
+            <if test="cardNo != null "> and card_no = #{cardNo}</if>
+            <if test="unSendOrderCount != null  and unSendOrderCount != ''"> and un_send_order_count = #{unSendOrderCount}</if>
+            <if test="loginName != null  and loginName != ''"> and login_name like concat('%', #{loginName}, '%')</if>
+            <if test="unReceiveOrderCount != null  and unReceiveOrderCount != ''"> and un_receive_order_count = #{unReceiveOrderCount}</if>
+            <if test="nickname != null  and nickname != ''"> and nickname like concat('%', #{nickname}, '%')</if>
+            <if test="unPayOrderCount != null "> and un_pay_order_count = #{unPayOrderCount}</if>
+            <if test="shopId != null  and shopId != ''"> and shop_id = #{shopId}</if>
+            <if test="memberId != null "> and member_id = #{memberId}</if>
+            <if test="inquire != null "> and inquire = #{inquire}</if>
+            <if test="address != null  and address != ''"> and address = #{address}</if>
+            <if test="uname != null  and uname != ''"> and uname like concat('%', #{uname}, '%')</if>
+            <if test="sex != null "> and sex = #{sex}</if>
+            <if test="collectCount != null "> and collect_count = #{collectCount}</if>
+            <if test="unreadMessageCount != null "> and unread_message_count = #{unreadMessageCount}</if>
+            <if test="unEvaluateOrderCount != null "> and un_evaluate_order_count = #{unEvaluateOrderCount}</if>
+            <if test="zipcode != null  and zipcode != ''"> and zipcode = #{zipcode}</if>
+            <if test="realName != null  and realName != ''"> and real_name like concat('%', #{realName}, '%')</if>
+            <if test="regionId != null  and regionId != ''"> and region_id = #{regionId}</if>
+            <if test="clerkCode != null  and clerkCode != ''"> and clerk_code = #{clerkCode}</if>
+            <if test="accountBalance != null "> and account_balance = #{accountBalance}</if>
+            <if test="ncmsMemberId != null  and ncmsMemberId != ''"> and ncms_member_id = #{ncmsMemberId}</if>
+            <if test="isOrder != null "> and is_order = #{isOrder}</if>
+        </where>
+    </select>
+    
+    <select id="selectHrUserById" parameterType="String" resultMap="HrUserResult">
+        <include refid="selectHrUserVo"/>
+        where mobile = #{mobile}
+    </select>
+        
+    <insert id="insertHrUser" parameterType="HrUser">
+        insert into hr_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="mobile != null">mobile,</if>
+            <if test="password != null and password != ''">password,</if>
+            <if test="userSession != null">user_session,</if>
+            <if test="birthday != null">birthday,</if>
+            <if test="idCard != null">id_card,</if>
+            <if test="regionName != null">region_name,</if>
+            <if test="pic != null">pic,</if>
+            <if test="cardNo != null">card_no,</if>
+            <if test="unSendOrderCount != null">un_send_order_count,</if>
+            <if test="loginName != null">login_name,</if>
+            <if test="unReceiveOrderCount != null">un_receive_order_count,</if>
+            <if test="nickname != null">nickname,</if>
+            <if test="unPayOrderCount != null">un_pay_order_count,</if>
+            <if test="shopId != null">shop_id,</if>
+            <if test="memberId != null">member_id,</if>
+            <if test="inquire != null">inquire,</if>
+            <if test="address != null">address,</if>
+            <if test="uname != null">uname,</if>
+            <if test="sex != null">sex,</if>
+            <if test="collectCount != null">collect_count,</if>
+            <if test="unreadMessageCount != null">unread_message_count,</if>
+            <if test="unEvaluateOrderCount != null">un_evaluate_order_count,</if>
+            <if test="zipcode != null">zipcode,</if>
+            <if test="realName != null">real_name,</if>
+            <if test="regionId != null">region_id,</if>
+            <if test="clerkCode != null">clerk_code,</if>
+            <if test="accountBalance != null">account_balance,</if>
+            <if test="ncmsMemberId != null">ncms_member_id,</if>
+            <if test="isOrder != null">is_order,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="mobile != null">#{mobile},</if>
+            <if test="password != null and password != ''">#{password},</if>
+            <if test="userSession != null">#{userSession},</if>
+            <if test="birthday != null">#{birthday},</if>
+            <if test="idCard != null">#{idCard},</if>
+            <if test="regionName != null">#{regionName},</if>
+            <if test="pic != null">#{pic},</if>
+            <if test="cardNo != null">#{cardNo},</if>
+            <if test="unSendOrderCount != null">#{unSendOrderCount},</if>
+            <if test="loginName != null">#{loginName},</if>
+            <if test="unReceiveOrderCount != null">#{unReceiveOrderCount},</if>
+            <if test="nickname != null">#{nickname},</if>
+            <if test="unPayOrderCount != null">#{unPayOrderCount},</if>
+            <if test="shopId != null">#{shopId},</if>
+            <if test="memberId != null">#{memberId},</if>
+            <if test="inquire != null">#{inquire},</if>
+            <if test="address != null">#{address},</if>
+            <if test="uname != null">#{uname},</if>
+            <if test="sex != null">#{sex},</if>
+            <if test="collectCount != null">#{collectCount},</if>
+            <if test="unreadMessageCount != null">#{unreadMessageCount},</if>
+            <if test="unEvaluateOrderCount != null">#{unEvaluateOrderCount},</if>
+            <if test="zipcode != null">#{zipcode},</if>
+            <if test="realName != null">#{realName},</if>
+            <if test="regionId != null">#{regionId},</if>
+            <if test="clerkCode != null">#{clerkCode},</if>
+            <if test="accountBalance != null">#{accountBalance},</if>
+            <if test="ncmsMemberId != null">#{ncmsMemberId},</if>
+            <if test="isOrder != null">#{isOrder},</if>
+         </trim>
+    </insert>
+
+    <update id="updateHrUser" parameterType="HrUser">
+        update hr_user
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="id != null">id = #{id},</if>
+            <if test="password != null and password != ''">password = #{password},</if>
+            <if test="userSession != null">user_session = #{userSession},</if>
+            <if test="birthday != null">birthday = #{birthday},</if>
+            <if test="idCard != null">id_card = #{idCard},</if>
+            <if test="regionName != null">region_name = #{regionName},</if>
+            <if test="pic != null">pic = #{pic},</if>
+            <if test="cardNo != null">card_no = #{cardNo},</if>
+            <if test="unSendOrderCount != null">un_send_order_count = #{unSendOrderCount},</if>
+            <if test="loginName != null">login_name = #{loginName},</if>
+            <if test="unReceiveOrderCount != null">un_receive_order_count = #{unReceiveOrderCount},</if>
+            <if test="nickname != null">nickname = #{nickname},</if>
+            <if test="unPayOrderCount != null">un_pay_order_count = #{unPayOrderCount},</if>
+            <if test="shopId != null">shop_id = #{shopId},</if>
+            <if test="memberId != null">member_id = #{memberId},</if>
+            <if test="inquire != null">inquire = #{inquire},</if>
+            <if test="address != null">address = #{address},</if>
+            <if test="uname != null">uname = #{uname},</if>
+            <if test="sex != null">sex = #{sex},</if>
+            <if test="collectCount != null">collect_count = #{collectCount},</if>
+            <if test="unreadMessageCount != null">unread_message_count = #{unreadMessageCount},</if>
+            <if test="unEvaluateOrderCount != null">un_evaluate_order_count = #{unEvaluateOrderCount},</if>
+            <if test="zipcode != null">zipcode = #{zipcode},</if>
+            <if test="realName != null">real_name = #{realName},</if>
+            <if test="regionId != null">region_id = #{regionId},</if>
+            <if test="clerkCode != null">clerk_code = #{clerkCode},</if>
+            <if test="accountBalance != null">account_balance = #{accountBalance},</if>
+            <if test="ncmsMemberId != null">ncms_member_id = #{ncmsMemberId},</if>
+            <if test="isOrder != null">is_order = #{isOrder},</if>
+        </trim>
+        where mobile = #{mobile}
+    </update>
+
+    <delete id="deleteHrUserById" parameterType="String">
+        delete from hr_user where mobile = #{mobile}
+    </delete>
+
+    <delete id="deleteHrUserByIds" parameterType="String">
+        delete from hr_user where mobile in 
+        <foreach item="mobile" collection="array" open="(" separator="," close=")">
+            #{mobile}
+        </foreach>
+    </delete>
+    
+</mapper>
