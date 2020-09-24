@@ -47,7 +47,7 @@ public class HrUser extends BaseEntity
 
     /** 会员卡号 */
     @Excel(name = "会员卡号")
-    private Long cardNo;
+    private String cardNo;
 
     /** $column.columnComment */
     @Excel(name = "会员卡号")
@@ -133,6 +133,10 @@ public class HrUser extends BaseEntity
     @Excel(name = "是否下单用户")
     private Integer isOrder;
 
+    /** 当前是否被拉黑 */
+    @Excel(name = "当前是否被拉黑")
+    private Integer isBlocked;
+
     public void setId(Integer id) 
     {
         this.id = id;
@@ -205,12 +209,12 @@ public class HrUser extends BaseEntity
     {
         return pic;
     }
-    public void setCardNo(Long cardNo) 
+    public void setCardNo(String cardNo)
     {
         this.cardNo = cardNo;
     }
 
-    public Long getCardNo() 
+    public String getCardNo()
     {
         return cardNo;
     }
@@ -404,6 +408,21 @@ public class HrUser extends BaseEntity
         return isOrder;
     }
 
+    public Integer getIsBlocked() {
+        return isBlocked;
+    }
+
+    public void setIsBlocked(Integer isBlocked) {
+        this.isBlocked = isBlocked;
+    }
+
+    public HrUser() {
+    }
+
+    public HrUser(Integer isOrder) {
+        this.isOrder = isOrder;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
@@ -437,6 +456,7 @@ public class HrUser extends BaseEntity
             .append("accountBalance", getAccountBalance())
             .append("ncmsMemberId", getNcmsMemberId())
             .append("isOrder", getIsOrder())
+            .append("isBlocked", getIsBlocked())
             .toString();
     }
 }

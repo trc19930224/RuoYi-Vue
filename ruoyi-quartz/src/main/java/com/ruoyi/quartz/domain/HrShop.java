@@ -184,6 +184,13 @@ public class HrShop extends BaseEntity
         return state;
     }
 
+    public HrShop() {
+    }
+
+    public HrShop(Integer state) {
+        this.state = state;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)

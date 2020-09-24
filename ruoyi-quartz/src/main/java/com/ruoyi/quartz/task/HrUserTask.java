@@ -34,7 +34,7 @@ public class HrUserTask {
     @Value("${requestUrl.login}")
     private String loginUrl;
 
-    @Value("${requestUrl.userInfo}")
+    @Value("${requestUrl.getUserInfo}")
     private String userInfoUrl;
 
     @Value("${rsa.publicKey}")
@@ -101,6 +101,7 @@ public class HrUserTask {
     public void updateAllUserInfo() throws Exception {
         List<HrUser> userList = userService.selectHrUserList(null);
         for (HrUser user: userList) {
+            user.setIsBlocked(0);
             updateUserInfo(user.getMobile());
         }
     }

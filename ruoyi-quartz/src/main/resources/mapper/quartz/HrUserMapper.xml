@@ -35,10 +35,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="accountBalance"    column="account_balance"    />
         <result property="ncmsMemberId"    column="ncms_member_id"    />
         <result property="isOrder"    column="is_order"    />
+        <result property="isBlocked"    column="is_blocked"    />
     </resultMap>
 
     <sql id="selectHrUserVo">
-        select id, mobile, password, user_session, birthday, id_card, region_name, pic, card_no, un_send_order_count, login_name, un_receive_order_count, nickname, un_pay_order_count, shop_id, member_id, inquire, address, uname, sex, collect_count, unread_message_count, un_evaluate_order_count, zipcode, real_name, region_id, clerk_code, account_balance, ncms_member_id, is_order from hr_user
+        select id, mobile, password, user_session, birthday, id_card, region_name, pic, card_no, un_send_order_count, login_name, un_receive_order_count, nickname, un_pay_order_count, shop_id, member_id, inquire, address, uname, sex, collect_count, unread_message_count, un_evaluate_order_count, zipcode, real_name, region_id, clerk_code, account_balance, ncms_member_id, is_order, is_blocked from hr_user
     </sql>
 
     <select id="selectHrUserList" parameterType="HrUser" resultMap="HrUserResult">
@@ -50,7 +51,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="idCard != null  and idCard != ''"> and id_card = #{idCard}</if>
             <if test="regionName != null  and regionName != ''"> and region_name like concat('%', #{regionName}, '%')</if>
             <if test="pic != null "> and pic = #{pic}</if>
-            <if test="cardNo != null "> and card_no = #{cardNo}</if>
+            <if test="cardNo != null and cardNo != ''"> and card_no = #{cardNo}</if>
             <if test="unSendOrderCount != null  and unSendOrderCount != ''"> and un_send_order_count = #{unSendOrderCount}</if>
             <if test="loginName != null  and loginName != ''"> and login_name like concat('%', #{loginName}, '%')</if>
             <if test="unReceiveOrderCount != null  and unReceiveOrderCount != ''"> and un_receive_order_count = #{unReceiveOrderCount}</if>
@@ -72,6 +73,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="accountBalance != null "> and account_balance = #{accountBalance}</if>
             <if test="ncmsMemberId != null  and ncmsMemberId != ''"> and ncms_member_id = #{ncmsMemberId}</if>
             <if test="isOrder != null "> and is_order = #{isOrder}</if>
+            <if test="isBlocked != null "> and is_blocked = #{isBlocked}</if>
         </where>
     </select>
     
@@ -91,7 +93,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="idCard != null">id_card,</if>
             <if test="regionName != null">region_name,</if>
             <if test="pic != null">pic,</if>
-            <if test="cardNo != null">card_no,</if>
+            <if test="cardNo != null and cardNo != ''">card_no,</if>
             <if test="unSendOrderCount != null">un_send_order_count,</if>
             <if test="loginName != null">login_name,</if>
             <if test="unReceiveOrderCount != null">un_receive_order_count,</if>
@@ -113,6 +115,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="accountBalance != null">account_balance,</if>
             <if test="ncmsMemberId != null">ncms_member_id,</if>
             <if test="isOrder != null">is_order,</if>
+            <if test="isBlocked != null ">is_blocked,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">#{id},</if>
@@ -123,7 +126,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="idCard != null">#{idCard},</if>
             <if test="regionName != null">#{regionName},</if>
             <if test="pic != null">#{pic},</if>
-            <if test="cardNo != null">#{cardNo},</if>
+            <if test="cardNo != null and cardNo != ''">#{cardNo},</if>
             <if test="unSendOrderCount != null">#{unSendOrderCount},</if>
             <if test="loginName != null">#{loginName},</if>
             <if test="unReceiveOrderCount != null">#{unReceiveOrderCount},</if>
@@ -145,6 +148,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="accountBalance != null">#{accountBalance},</if>
             <if test="ncmsMemberId != null">#{ncmsMemberId},</if>
             <if test="isOrder != null">#{isOrder},</if>
+            <if test="isBlocked != null ">#{isBlocked}</if>
          </trim>
     </insert>
 
@@ -158,7 +162,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="idCard != null">id_card = #{idCard},</if>
             <if test="regionName != null">region_name = #{regionName},</if>
             <if test="pic != null">pic = #{pic},</if>
-            <if test="cardNo != null">card_no = #{cardNo},</if>
+            <if test="cardNo != null and cardNo != ''">card_no = #{cardNo},</if>
             <if test="unSendOrderCount != null">un_send_order_count = #{unSendOrderCount},</if>
             <if test="loginName != null">login_name = #{loginName},</if>
             <if test="unReceiveOrderCount != null">un_receive_order_count = #{unReceiveOrderCount},</if>
@@ -180,6 +184,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="accountBalance != null">account_balance = #{accountBalance},</if>
             <if test="ncmsMemberId != null">ncms_member_id = #{ncmsMemberId},</if>
             <if test="isOrder != null">is_order = #{isOrder},</if>
+            <if test="isBlocked != null ">is_blocked = #{isBlocked}</if>
         </trim>
         where mobile = #{mobile}
     </update>

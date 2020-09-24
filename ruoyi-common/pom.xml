@@ -126,6 +126,13 @@
             <version>3.10.0</version>
         </dependency>
 
+        <!-- 钉钉机器人通知-->
+        <dependency>
+            <groupId>com.aliyun</groupId>
+            <artifactId>alibaba-dingtalk-service-sdk</artifactId>
+            <version>1.0.1</version>
+        </dependency>
+
     </dependencies>
 
 </project>
