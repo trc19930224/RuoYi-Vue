@@ -21,6 +21,7 @@ import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.CompletableFuture;
 
 @Component("HrStockTask")
 public class HrStockTask {
@@ -50,6 +51,7 @@ public class HrStockTask {
     */
     public void queryStock(String mobile, String shopCode) throws IOException, ApiException {
         HrUser user = userService.selectHrUserById(mobile);
+        if (user.getIsBlocked() == 1) {return;} // 账户拉黑状态下不再发起请求
         Map<String, String> param = new HashMap<String, String>();
         param.put("activityId", "2");
         param.put("shopCode", shopCode);
@@ -62,6 +64,7 @@ public class HrStockTask {
         Response productsResponse = client.newCall(productsRequest).execute();
         HrBaseResponse<HrShopProducts> productsModel = JSON.parseObject(productsResponse.body().string(), new TypeReference<HrBaseResponse<HrShopProducts>>() {});
         if (productsModel.getStateCode() == 0) {
+            log.info("请求成功次数+1");
             for (HrProduct product: productsModel.getData().getProducts()) {
                 if ((product.getStock() >= 6) && (product.getProductId().equals("230037") || product.getProductId().equals("195731") || product.getProductId().equals("195730"))) {
                     // 满足下单条件
@@ -93,7 +96,6 @@ public class HrStockTask {
         // 查询出可扫描的账号数量
         List<HrUser> userList = userService.selectHrUserList(new HrUser(0));
         log.info("可扫描的账户数量为:"+ userList.size());
-        int time = 4;
     }
 
 }

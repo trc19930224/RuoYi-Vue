@@ -31,6 +31,9 @@ public class HrUserTask {
     @Autowired
     OkHttpClient client;
 
+    @Autowired
+    HrOrderTask orderTask;
+
     @Value("${requestUrl.login}")
     private String loginUrl;
 
